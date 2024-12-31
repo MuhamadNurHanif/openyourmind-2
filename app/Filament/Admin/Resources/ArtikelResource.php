@@ -15,6 +15,11 @@ use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\RichEditor;
+use Filament\Tables\Actions\Dropdown;
+use Filament\Tables\Actions\EditAction;
+use Filament\Tables\Actions\DeleteAction;
+use Filament\Tables\Actions\ViewAction;
+use Filament\Tables\Actions\ActionGroup;
 
 class ArtikelResource extends Resource
 {
@@ -84,6 +89,8 @@ class ArtikelResource extends Resource
                 TextColumn::make('deskripsi')
                     ->limit(100)
                     ->label('Deskripsi'),
+                TextColumn::make('Aksi')
+                    ->label('Aksi'),
             ])
             ->filters([
                 Tables\Filters\SelectFilter::make('kategori')
@@ -96,8 +103,22 @@ class ArtikelResource extends Resource
                     ->label('Kategori'),
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make(),
+                ActionGroup::make([
+                    EditAction::make()
+                        ->label('Edit Data')
+                        ->url(fn($record) => route('filament.admin.resources.artikels.edit', $record)),
+
+                    ViewAction::make()
+                        ->label('Show Artikel')
+                        ->url(fn($record) => route('filament.admin.resources.artikels.show', $record)),
+
+                    DeleteAction::make()
+                        ->label('Delete Data')
+                        ->action(fn($record) => $record->delete()),
+                ])
+                    ->label('Actions')
+                    ->icon('heroicon-o-ellipsis-horizontal') // Ikon titik tiga
+                    ->color('primary'), // Warna dropdown
             ])
             ->bulkActions([
                 Tables\Actions\DeleteBulkAction::make(),

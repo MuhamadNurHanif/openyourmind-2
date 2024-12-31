@@ -65,11 +65,11 @@ class ListArtikel extends ListRecords
     protected function getTableActions(): array
     {
         return [
-            Tables\Actions\Action::make('view')
+            Tables\Actions\ViewAction::make('view')
                 ->label('Show')
-                ->icon('heroicon-o-eye')
-                ->url(fn($record) => route('filament.admin.resources.artikels.show', $record))
-                ->color('primary'),
+                ->icon('heroicon-o-pencil')
+                ->color('primary')
+                ->url(fn($record) => route('filament.admin.resources.artikels.show', $record)),
         ];
     }
 }

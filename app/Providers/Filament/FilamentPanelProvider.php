@@ -28,7 +28,7 @@ class FilamentPanelProvider extends PanelProvider
             ->id('filament')
             ->path('filament')
             ->login()
-            // ->registration()
+            ->registration()
             ->passwordReset()
             ->emailVerification()
             ->profile()
