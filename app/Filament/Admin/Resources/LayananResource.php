@@ -39,17 +39,19 @@ class LayananResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
-        ->columns([
-            TextColumn::make('jenis_layanan')
-                ->sortable()
-                ->searchable()
-                ->label('Jenis Layanan'),
-        ])
-        ->actions([
-            Tables\Actions\EditAction::make(),
-            Tables\Actions\DeleteAction::make(),
-        ]);
+            ->columns([
+                TextColumn::make('jenis_layanan')
+                    ->sortable()
+                    ->searchable()
+                    ->label('Jenis Layanan'),
+            ])
+            ->actions([
+                Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make()
+                // forceDelete dipanggil dengan chaining
+            ]);
     }
+    
 
     public static function getPages(): array
     {
