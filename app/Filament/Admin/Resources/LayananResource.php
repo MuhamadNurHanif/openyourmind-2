@@ -23,6 +23,7 @@ class LayananResource extends Resource
 {
     protected static ?string $model = Layanan::class;
 
+    protected static ?string $navigationGroup = 'Konseling';
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
     public static function form(Form $form): Form
