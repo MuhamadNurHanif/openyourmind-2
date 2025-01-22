@@ -2,36 +2,28 @@
 
 namespace App\Filament\Admin\Resources\ArtikelResource\Pages;
 
+use Filament\Resources\Pages\Page;
 use App\Filament\Admin\Resources\ArtikelResource;
-use Filament\Forms\Components\RichEditor;
-use Filament\Forms\Components\FileUpload;
-use Filament\Resources\Pages\ViewRecord;
-use Filament\Tables\Columns\TextColumn;;
 
-
-class ShowArtikel extends ViewRecord
+class ShowArtikel extends Page
 {
     protected static string $resource = ArtikelResource::class;
 
-    protected function getViewData(): array
+    protected static string $view = 'filament.pages.show-artikel';
+
+    public $record;
+
+    public function mount($record): void
     {
-        return [
-            'judul' => $this->record->judul ?? 'No Title',
-            'kategori' => $this->record->kategori ?? 'No Category',
-            'tgl_published' => $this->record->tgl_published ?? 'No Date',
-            'deskripsi' => $this->record->deskripsi ?? 'No Description',
-            'gambar' => $this->record->gambar ?? 'No Image',
-        ];
+        $this->record = ArtikelResource::getModel()::find($record);
+
+        if (!$this->record) {
+            abort(404, 'Artikel tidak ditemukan.');
+        }
     }
 
-    protected function view(): array
+    public function getMetaDescription(): ?string
     {
-        return [
-            TextColumn::make('judul')->label('Judul'),
-            TextColumn::make('kategori')->label('Kategori'),
-            TextColumn::make('tgl_published')->label('Tanggal Terbit')->date(),
-            TextColumn::make('deskripsi')->label('Deskripsi'),
-            FileUpload::make('gambar')->label('Gambar')->nullable(),
-        ];
+        return str()->limit(strip_tags($this->record->konten), 160);
     }
 }

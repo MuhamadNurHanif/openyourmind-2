@@ -47,28 +47,37 @@ class ArtikelResource extends Resource
                     ])
                     ->required()
                     ->label('Kategori'),
-                RichEditor::make('deskripsi')
-                    ->required()
-                    ->label('Deskripsi')
-                    ->toolbarButtons([
-                        'bold',
-                        'italic',
-                        'underline',
-                        'link',
-                        'bullets',
-                        'numbering',
-                        'quote',
-                        'code',
-                        'redo',
-                        'undo'
-                    ])
-                    ->maxLength(5000),
                 FileUpload::make('gambar')
                     ->label('Gambar')
                     ->image()
                     ->directory('artikel-gambar')
                     ->nullable()
                     ->disk('public'),
+                RichEditor::make('deskripsi')
+                    ->required()
+                    ->label('Deskripsi')
+                    ->fileAttachmentsDisk('s3')
+                    ->fileAttachmentsDirectory('attachments')
+                    ->fileAttachmentsVisibility('private')
+                    ->toolbarButtons([
+                        'attachFiles',
+                        'blockquote',
+                        'bold',
+                        'bulletList',
+                        'codeBlock',
+                        'h2',
+                        'h3',
+                        'italic',
+                        'link',
+                        'orderedList',
+                        'redo',
+                        'strike',
+                        'underline',
+                        'undo',
+                    ])
+                    ->maxLength(5000)
+                    ->columnSpan('full')
+                    ->columnSpan('full'),
             ]);
     }
 
@@ -117,8 +126,8 @@ class ArtikelResource extends Resource
                         ->action(fn($record) => $record->delete()),
                 ])
                     ->label('Actions')
-                    ->icon('heroicon-o-ellipsis-horizontal') // Ikon titik tiga
-                    ->color('primary'), // Warna dropdown
+                    ->icon('heroicon-o-ellipsis-horizontal')
+                    ->color('primary'),
             ])
             ->bulkActions([
                 Tables\Actions\DeleteBulkAction::make(),
