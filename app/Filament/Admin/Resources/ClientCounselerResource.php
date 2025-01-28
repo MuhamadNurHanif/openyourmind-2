@@ -2,17 +2,20 @@
 
 namespace App\Filament\Admin\Resources;
 
-use App\Filament\Admin\Resources\ClientCounselerResource\Pages;
-use App\Filament\Admin\Resources\ClientCounselerResource\RelationManagers;
-use App\Models\ClientCounseler;
 use Filament\Forms;
-use Filament\Forms\Form;
-use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Forms\Form;
 use Filament\Tables\Table;
+use App\Models\ClientCounseler;
+use Filament\Resources\Resource;
 use Filament\Tables\Columns\TextColumn;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use App\Filament\Admin\Resources\ClientCounselerResource\Pages;
+use App\Filament\Admin\Resources\ClientCounselerResource\RelationManagers;
+use App\Filament\Admin\Resources\ClientCounselerResource\Pages\EditClientCounseler;
+use App\Filament\Admin\Resources\ClientCounselerResource\Pages\ListClientCounselers;
+use App\Filament\Admin\Resources\ClientCounselerResource\Pages\CreateClientCounseler;
 
 class ClientCounselerResource extends Resource
 {

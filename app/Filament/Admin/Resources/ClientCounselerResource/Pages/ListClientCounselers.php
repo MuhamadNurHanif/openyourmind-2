@@ -2,9 +2,10 @@
 
 namespace App\Filament\Admin\Resources\ClientCounselerResource\Pages;
 
-use App\Filament\Admin\Resources\ClientCounselerResource;
 use Filament\Actions;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Resources\Pages\ListRecords;
+use App\Filament\Admin\Resources\ClientCounselerResource;
 
 class ListClientCounselers extends ListRecords
 {
@@ -17,13 +18,13 @@ class ListClientCounselers extends ListRecords
                 ->sortable()
                 ->searchable()
                 ->label('nama'),
-                TextColumn::make('email')
+            TextColumn::make('email')
                 ->label('email'),
-                TextColumn::make('no_hp')
+            TextColumn::make('no_hp')
                 ->label('no_hp'),
-                TextColumn::make('domisili')
+            TextColumn::make('domisili')
                 ->label('keluhan'),
-                TextColumn::make('jenis_layanan')
+            TextColumn::make('jenis_layanan')
                 ->label('jenis_layanan'),
         ];
     }
