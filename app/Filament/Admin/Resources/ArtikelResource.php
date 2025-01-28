@@ -15,6 +15,11 @@ use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\RichEditor;
+use Filament\Tables\Actions\Dropdown;
+use Filament\Tables\Actions\EditAction;
+use Filament\Tables\Actions\DeleteAction;
+use Filament\Tables\Actions\ViewAction;
+use Filament\Tables\Actions\ActionGroup;
 
 class ArtikelResource extends Resource
 {
@@ -42,28 +47,37 @@ class ArtikelResource extends Resource
                     ])
                     ->required()
                     ->label('Kategori'),
-                RichEditor::make('deskripsi')
-                    ->required()
-                    ->label('Deskripsi')
-                    ->toolbarButtons([
-                        'bold',
-                        'italic',
-                        'underline',
-                        'link',
-                        'bullets',
-                        'numbering',
-                        'quote',
-                        'code',
-                        'redo',
-                        'undo'
-                    ])
-                    ->maxLength(5000),
                 FileUpload::make('gambar')
                     ->label('Gambar')
                     ->image()
                     ->directory('artikel-gambar')
                     ->nullable()
                     ->disk('public'),
+                RichEditor::make('deskripsi')
+                    ->required()
+                    ->label('Deskripsi')
+                    ->fileAttachmentsDisk('s3')
+                    ->fileAttachmentsDirectory('attachments')
+                    ->fileAttachmentsVisibility('private')
+                    ->toolbarButtons([
+                        'attachFiles',
+                        'blockquote',
+                        'bold',
+                        'bulletList',
+                        'codeBlock',
+                        'h2',
+                        'h3',
+                        'italic',
+                        'link',
+                        'orderedList',
+                        'redo',
+                        'strike',
+                        'underline',
+                        'undo',
+                    ])
+                    ->maxLength(5000)
+                    ->columnSpan('full')
+                    ->columnSpan('full'),
             ]);
     }
 
@@ -84,6 +98,8 @@ class ArtikelResource extends Resource
                 TextColumn::make('deskripsi')
                     ->limit(100)
                     ->label('Deskripsi'),
+                TextColumn::make('Aksi')
+                    ->label('Aksi'),
             ])
             ->filters([
                 Tables\Filters\SelectFilter::make('kategori')
@@ -96,8 +112,22 @@ class ArtikelResource extends Resource
                     ->label('Kategori'),
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make(),
+                ActionGroup::make([
+                    EditAction::make()
+                        ->label('Edit Data')
+                        ->url(fn($record) => route('filament.admin.resources.artikels.edit', $record)),
+
+                    ViewAction::make()
+                        ->label('Show Artikel')
+                        ->url(fn($record) => route('filament.admin.resources.artikels.show', $record)),
+
+                    DeleteAction::make()
+                        ->label('Delete Data')
+                        ->action(fn($record) => $record->delete()),
+                ])
+                    ->label('Actions')
+                    ->icon('heroicon-o-ellipsis-horizontal')
+                    ->color('primary'),
             ])
             ->bulkActions([
                 Tables\Actions\DeleteBulkAction::make(),

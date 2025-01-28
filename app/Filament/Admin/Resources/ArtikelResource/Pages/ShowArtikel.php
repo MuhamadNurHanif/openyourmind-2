@@ -2,44 +2,28 @@
 
 namespace App\Filament\Admin\Resources\ArtikelResource\Pages;
 
-use App\Filament\Admin\Resources\ArtikelResource;
-use Filament\Resources\Pages\ViewRecord;
-use Filament\Forms\Components\TextInput;
-use Filament\Forms\Components\RichEditor;
-use Filament\Forms\Components\FileUpload;
-use Filament\Forms;
 use Filament\Resources\Pages\Page;
+use App\Filament\Admin\Resources\ArtikelResource;
 
-class ShowArtikel extends ViewRecord
+class ShowArtikel extends Page
 {
     protected static string $resource = ArtikelResource::class;
 
-    protected function getFormSchema(): array
+    protected static string $view = 'filament.pages.show-artikel';
+
+    public $record;
+
+    public function mount($record): void
     {
-        return [
-            TextInput::make('judul')
-                ->label('Judul')
-                ->disabled(),
+        $this->record = ArtikelResource::getModel()::find($record);
 
-            FileUpload::make('gambar')
-                ->label('Gambar')
-                ->disabled()
-                ->image()
-                ->directory('artikel-gambar')
-                ->disk('public'),
+        if (!$this->record) {
+            abort(404, 'Artikel tidak ditemukan.');
+        }
+    }
 
-            TextInput::make('kategori')
-                ->label('Kategori')
-                ->disabled(),
-
-            TextInput::make('tgl_published')
-                ->label('Tanggal Terbit')
-                ->disabled()
-                ->formatStateUsing(fn($state) => \Carbon\Carbon::parse($state)->translatedFormat('l, d F Y')),
-
-            RichEditor::make('deskripsi')
-                ->label('Deskripsi')
-                ->disabled(),
-        ];
+    public function getMetaDescription(): ?string
+    {
+        return str()->limit(strip_tags($this->record->konten), 160);
     }
 }

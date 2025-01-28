@@ -46,8 +46,9 @@ class User extends Authenticatable
         ];
     }
 
+    // role & permission
     public function canAccessFilament(): bool
     {
-        return true; // role & permission
+        return true;
     }
 }
