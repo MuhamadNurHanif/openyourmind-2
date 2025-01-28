@@ -24,7 +24,7 @@ class LayananResource extends Resource
     protected static ?string $model = Layanan::class;
 
     protected static ?string $navigationGroup = 'Konseling';
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-question-mark-circle';
 
     public static function form(Form $form): Form
     {
@@ -33,7 +33,7 @@ class LayananResource extends Resource
                 TextInput::make('jenis_layanan')
                     ->required()
                     ->label('Jenis Layanan'),
-        ]);
+            ]);
     }
 
     public static function table(Table $table): Table
@@ -51,7 +51,7 @@ class LayananResource extends Resource
                 // forceDelete dipanggil dengan chaining
             ]);
     }
-    
+
 
     public static function getPages(): array
     {

@@ -24,7 +24,7 @@ class JadwalKonselorResource extends Resource
 {
     protected static ?string $model = JadwalKonselor::class;
     protected static ?string $navigationGroup = 'Konseling';
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-calendar';
 
     public static function form(Forms\Form $form): Forms\Form
     {
@@ -36,7 +36,7 @@ class JadwalKonselorResource extends Resource
                 DatePicker::make('tgl_konseling')
                     ->required()
                     ->label('Tanggal Konseling'),
-            ]);   
+            ]);
     }
 
     public static function table(Table $table): Table
