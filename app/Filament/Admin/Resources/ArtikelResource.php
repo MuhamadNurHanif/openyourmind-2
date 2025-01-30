@@ -25,8 +25,10 @@ class ArtikelResource extends Resource
 {
     protected static ?string $model = Artikel::class;
 
-    protected static ?string $navigationGroup = 'Content';
-    protected static ?string $navigationIcon = 'heroicon-o-newspaper';
+    protected static ?string $navigationGroup = 'Content Writer';
+
+    protected static ?string $navigationIcon = 'heroicon-o-clipboard';
+
 
     public static function form(Forms\Form $form): Forms\Form
     {

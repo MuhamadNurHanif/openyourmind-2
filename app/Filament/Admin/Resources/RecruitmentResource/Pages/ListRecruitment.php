@@ -6,14 +6,17 @@ use App\Filament\Admin\Resources\RecruitmentResource;
 use Filament\Actions;
 use Filament\Resources\Pages\ListRecords;
 
-class ListRecruitments extends ListRecords
+class ListRecruitment extends ListRecords
 {
     protected static string $resource = RecruitmentResource::class;
 
     protected function getHeaderActions(): array
     {
         return [
-            Actions\CreateAction::make(),
+            \Filament\Actions\CreateAction::make()
+                ->label('Create Recrutmen')
+                ->color('success')
+                ->url(route('filament.admin.resources.recruitments.create')),
         ];
     }
 }

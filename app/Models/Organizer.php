@@ -17,4 +17,8 @@ class Organizer extends Model
         'deskripsi',
         'tgl_publish',
     ];
+
+    protected $casts = [
+        'tgl_publish' => 'datetime',
+    ];
 }

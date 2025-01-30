@@ -17,8 +17,8 @@ class OrganizerResource extends Resource
 {
     protected static ?string $model = Organizer::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
-
+    protected static ?string $navigationGroup = 'Event Organizer';
+    protected static ?string $navigationIcon = 'heroicon-o-newspaper';
     public static function form(Form $form): Form
     {
         return $form
@@ -27,12 +27,17 @@ class OrganizerResource extends Resource
                     ->required()
                     ->maxLength(255),
                 Forms\Components\FileUpload::make('gambar')
-                    ->required(),
+                    ->required()
+                    ->image()
+                    ->disk('public')
+                    ->directory('organizers')
+                    ->label('Gambar Organizer'),
                 Forms\Components\Textarea::make('deskripsi')
                     ->required()
                     ->columnSpanFull(),
-                // Forms\Components\DateTimePicker::make('tgl_publish')
-                //     ->required(),
+                Forms\Components\DateTimePicker::make('tgl_publish')
+                    ->required()
+                    ->label('Tanggal Publikasi'),
             ]);
     }
 
@@ -44,17 +49,13 @@ class OrganizerResource extends Resource
                     ->searchable(),
                 Tables\Columns\ImageColumn::make('gambar')
                     ->searchable(),
-                // Tables\Columns\TextColumn::make('tgl_publish')
-                //     ->dateTime()
-                //     ->sortable(),
+                Tables\Columns\TextColumn::make('tgl_publish')
+                    ->dateTime()
+                    ->sortable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
-                // Tables\Columns\TextColumn::make('updated_at')
-                //     ->dateTime()
-                //     ->sortable()
-                //     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
                 //
@@ -80,7 +81,7 @@ class OrganizerResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListOrganizers::route('/'),
+            'index' => Pages\ListOrganizer::route('/'),
             'create' => Pages\CreateOrganizer::route('/create'),
             'edit' => Pages\EditOrganizer::route('/{record}/edit'),
         ];

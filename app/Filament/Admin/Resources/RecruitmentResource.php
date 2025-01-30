@@ -17,7 +17,9 @@ class RecruitmentResource extends Resource
 {
     protected static ?string $model = Recruitment::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationGroup = 'Recrutmen';
+
+    protected static ?string $navigationIcon = 'heroicon-o-briefcase';
 
     public static function form(Form $form): Form
     {
@@ -52,7 +54,7 @@ class RecruitmentResource extends Resource
                     ->sortable(),
                 Tables\Columns\TextColumn::make('tautan')
                     ->label('Tautan')
-                    ->url(fn ($record) => $record->tautan, true),
+                    ->url(fn($record) => $record->tautan, true),
                 Tables\Columns\TextColumn::make('tgl_publish')
                     ->label('Tanggal Publikasi')
                     ->date(),
@@ -82,7 +84,7 @@ class RecruitmentResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListRecruitments::route('/'),
+            'index' => Pages\ListRecruitment::route('/'),
             'create' => Pages\CreateRecruitment::route('/create'),
             'edit' => Pages\EditRecruitment::route('/{record}/edit'),
         ];
