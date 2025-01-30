@@ -11,5 +11,6 @@ Route::get('/', function () {
 });
 
 
+// admin panel
 Route::get('/artikel/{record}', ShowArtikel::class);
 Route::resource('client_counseler', ClientCounselerController::class);

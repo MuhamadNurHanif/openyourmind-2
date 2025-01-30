@@ -1,14 +1,17 @@
 <?php
 
-namespace App\Filament\Admin\Resources\JadwalKonselorResource\Pages;
+namespace App\Filament\Admin\Resources\JadwalCounselorResource\Pages;
 
-use App\Filament\Admin\Resources\JadwalKonselorResource;
-use Filament\Actions;
+// use Filament\Actions;
+// use App\Models\JadwalCounselor;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Resources\Pages\ListRecords;
+use Filament\Tables\Actions\Action;
+use App\Filament\Admin\Resources\JadwalCounselorResource;
 
-class ListJadwalKonselors extends ListRecords
+class ListJadwalCounselors extends ListRecords
 {
-    protected static string $resource = JadwalKonselorResource::class;
+    protected static string $resource = JadwalCounselorResource::class;
 
     protected function getTableColumns(): array
     {
@@ -30,14 +33,14 @@ class ListJadwalKonselors extends ListRecords
             \Filament\Actions\CreateAction::make()
                 ->label('Create Jadwal')
                 ->color('success')
-                ->url(route('filament.admin.resources.jadwal-konselors.create')),
+                ->url(JadwalCounselorResource::getUrl('create')),
         ];
     }
 
     protected function getTableActions(): array
     {
         return [
-            Tables\Actions\Action::make('view')
+            Action::make('view')
                 ->label('Show')
                 ->icon('heroicon-o-eye')
                 ->url(fn($record) => route('filament.admin.resources.jadwal-konselors.show', $record))

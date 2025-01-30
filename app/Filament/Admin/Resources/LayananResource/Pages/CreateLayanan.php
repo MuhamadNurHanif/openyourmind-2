@@ -12,7 +12,7 @@ class CreateLayanan extends CreateRecord
 
     protected function getFormSchema(): array
     {
-        return ArtikelResource::form($this->form)->getSchema();
+        return LayananResource::form($this->form)->getSchema();;
     }
 
     protected function getRedirectUrl(): string

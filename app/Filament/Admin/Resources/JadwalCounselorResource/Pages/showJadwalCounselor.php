@@ -1,19 +1,19 @@
 <?php
 
-namespace App\Filament\Admin\Resources\JadwalKonselorResource\Pages;
+namespace App\Filament\Admin\Resources\JadwalCounselorResource\Pages;
 
-use App\Filament\Admin\Resources\JadwalKonselorResource;
-use Filament\Resources\Pages\ViewRecord;
-use Filament\Forms\Components\TextInput;
 use Filament\Forms;
-use Filament\Resources\Pages\Page;
+use Filament\Forms\Components\TextInput;
+use Filament\Resources\Pages\ViewRecord;
+use App\Filament\Admin\Resources\JadwalCounselorResource;
 
-class ShowJadwalKonselor extends ViewRecord
+class ShowJadwalCounselor extends ViewRecord
 {
-    protected static string $resource = JadwalKonselorResource::class;
+    protected static string $resource = JadwalCounselorResource::class;
 
     protected function getFormSchema(): array
     {
+        // dd(static::$resource);
         return [
             TextInput::make('nama_konselor')
                 ->label('Nama Konselor')

@@ -2,9 +2,9 @@
 
 namespace App\Filament\Admin\Resources;
 
-use App\Filament\Admin\Resources\JadwalKonselorResource\Pages;
-use App\Filament\Admin\Resources\JadwalKonselorResource\RelationManagers;
-use App\Models\JadwalKonselor;
+use App\Filament\Admin\Resources\JadwalCounselorResource\Pages;
+use App\Filament\Admin\Resources\JadwalCounselorResource\RelationManagers;
+use App\Models\JadwalCounselor;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -20,9 +20,9 @@ use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\RichEditor;
 
-class JadwalKonselorResource extends Resource
+class JadwalCounselorResource extends Resource
 {
-    protected static ?string $model = JadwalKonselor::class;
+    protected static ?string $model = JadwalCounselor::class;
     protected static ?string $navigationGroup = 'Konseling';
     protected static ?string $navigationIcon = 'heroicon-o-calendar';
 
@@ -70,10 +70,10 @@ class JadwalKonselorResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListJadwalKonselors::route('/'),
-            'create' => Pages\CreateJadwalKonselor::route('/create'),
-            'edit' => Pages\EditJadwalKonselor::route('/{record}/edit'),
-            'show' => Pages\ShowJadwalKonselor::route('/{record}'),
+            'index' => Pages\ListJadwalCounselors::route('/'),
+            'create' => Pages\CreateJadwalCounselor::route('/create'),
+            'edit' => Pages\EditJadwalCounselor::route('/{record}/edit'),
+            'show' => Pages\showJadwalCounselor::route('/{record}'),
         ];
     }
 }

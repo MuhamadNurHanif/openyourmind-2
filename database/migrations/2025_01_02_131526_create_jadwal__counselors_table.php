@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('jadwal_konselor', function (Blueprint $table) {
+        Schema::create('jadwal_Counselor', function (Blueprint $table) {
             $table->id();
             $table->string('nama_konselor', 255);
             $table->date('tgl_konseling');
@@ -24,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('jadwal_konselor');
+        Schema::dropIfExists('jadwal_Counselor');
     }
 };

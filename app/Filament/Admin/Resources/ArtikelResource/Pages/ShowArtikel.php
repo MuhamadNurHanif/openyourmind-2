@@ -9,7 +9,9 @@ class ShowArtikel extends Page
 {
     protected static string $resource = ArtikelResource::class;
 
-    protected static string $view = 'filament.pages.show-artikel';
+    const RESOURCE = ArtikelResource::class;
+
+    protected static string $view = 'artikel.show-artikel';
 
     public $record;
 
@@ -25,5 +27,10 @@ class ShowArtikel extends Page
     public function getMetaDescription(): ?string
     {
         return str()->limit(strip_tags($this->record->konten), 160);
+    }
+
+    public static function getResource(): string
+    {
+        return self::RESOURCE;
     }
 }

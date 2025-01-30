@@ -2,9 +2,12 @@
 
 namespace App\Filament\Admin\Resources\LayananResource\Pages;
 
-use App\Filament\Admin\Resources\LayananResource;
 use Filament\Actions;
+use Filament\Tables\Columns\TextColumn; // Diperbaiki: Columns (bentuk plural)
+use Filament\Tables\Actions\DeleteBulkAction; // Ditambahkan
+use Filament\Tables\Actions\Action; // Ditambahkan
 use Filament\Resources\Pages\ListRecords;
+use App\Filament\Admin\Resources\LayananResource;
 
 class ListLayanans extends ListRecords
 {
@@ -22,14 +25,14 @@ class ListLayanans extends ListRecords
     protected function getTableBulkActions(): array
     {
         return [
-            Tables\Actions\DeleteBulkAction::make(),
+            DeleteBulkAction::make(), // Diperbaiki: Menghapus prefix Tables\
         ];
     }
 
     protected function getHeaderActions(): array
     {
         return [
-            \Filament\Actions\CreateAction::make()
+            Actions\CreateAction::make()
                 ->label('Create Layanan')
                 ->color('success')
                 ->url(route('filament.admin.resources.layanans.create')),
@@ -39,7 +42,7 @@ class ListLayanans extends ListRecords
     protected function getTableActions(): array
     {
         return [
-            Tables\Actions\Action::make('view')
+            Action::make('view') // Diperbaiki: Menghapus prefix Tables\
                 ->label('Show')
                 ->icon('heroicon-o-eye')
                 ->url(fn($record) => route('filament.admin.resources.layanans.show', $record))

@@ -56,7 +56,7 @@ class ArtikelResource extends Resource
                 RichEditor::make('deskripsi')
                     ->required()
                     ->label('Deskripsi')
-                    ->fileAttachmentsDisk('s3')
+                    ->fileAttachmentsDisk('public')
                     ->fileAttachmentsDirectory('attachments')
                     ->fileAttachmentsVisibility('private')
                     ->toolbarButtons([

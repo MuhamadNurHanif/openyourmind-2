@@ -13,7 +13,11 @@ class ListUser extends ListRecords
 
     protected function getTableColumns(): array
     {
-        return UserResource::table($this->table)->getColumns();
+        return [
+            Tables\Columns\TextColumn::make('name')->label('Name'),
+            Tables\Columns\TextColumn::make('email')->label('Email'),
+            Tables\Columns\TextColumn::make('created_at')->label('Created At')->date(),
+        ];
     }
 
     protected function getTableFilters(): array

@@ -16,7 +16,7 @@
                 {{-- gambar --}}
                 @if ($record->gambar)
                     <div class="card bg-white overflow-hidden rounded-lg mb-5">
-                        <img src="{{ asset($record->gambar) }}"
+                        <img src="{{ asset('storage/' . $record->gambar) }}"
                             class="img-fluid rounded-4 w-40% md:w-3/4 lg:w-1/2 h-auto object-cover mx-auto">
                     </div>
                 @endif

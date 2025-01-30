@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Filament\Admin\Resources\JadwalKonselorResource\Pages;
+namespace App\Filament\Admin\Resources\JadwalCounselorResource\Pages;
 
-use App\Filament\Admin\Resources\JadwalKonselorResource;
+use App\Filament\Admin\Resources\JadwalCounselorResource;
 use Filament\Actions;
 use Filament\Resources\Pages\EditRecord;
 
-class EditJadwalKonselor extends EditRecord
+class EditJadwalCounselor extends EditRecord
 {
-    protected static string $resource = JadwalKonselorResource::class;
+    protected static string $resource = JadwalCounselorResource::class;
 
     protected function getRedirectUrl(): string
     {
