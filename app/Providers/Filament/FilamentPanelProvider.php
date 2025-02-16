@@ -2,22 +2,30 @@
 
 namespace App\Providers\Filament;
 
-use App\Filament\Pages\Auth\Register;
-use Filament\Http\Middleware\Authenticate;
-use Filament\Http\Middleware\AuthenticateSession;
-use Filament\Http\Middleware\DisableBladeIconComponents;
-use Filament\Http\Middleware\DispatchServingFilamentEvent;
 use Filament\Pages;
 use Filament\Panel;
+use Filament\Widgets;
 use Filament\PanelProvider;
 use Filament\Support\Colors\Color;
-use Filament\Widgets;
-use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
-use Illuminate\Cookie\Middleware\EncryptCookies;
-use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
-use Illuminate\Routing\Middleware\SubstituteBindings;
+use App\Filament\Pages\Auth\Register;
+use App\Http\Middleware\TrackVisitors;
+use Filament\Http\Middleware\Authenticate;
+use App\Filament\Admin\Resources\UserResource;
 use Illuminate\Session\Middleware\StartSession;
+use Illuminate\Cookie\Middleware\EncryptCookies;
+use App\Filament\Admin\Resources\ArtikelResource;
+use App\Filament\Admin\Resources\LayananResource;
+use Filament\Http\Middleware\AuthenticateSession;
+use App\Filament\Admin\Resources\OrganizerResource;
+use App\Filament\Admin\Resources\RecruitmentResource;
+use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
+use Filament\Http\Middleware\DisableBladeIconComponents;
+use App\Filament\Admin\Resources\ClientCounselerResource;
+use App\Filament\Admin\Resources\JadwalCounselorResource;
+use Filament\Http\Middleware\DispatchServingFilamentEvent;
+use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
+use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
 
 class FilamentPanelProvider extends PanelProvider
 {
@@ -43,7 +51,7 @@ class FilamentPanelProvider extends PanelProvider
             ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\\Filament\\Widgets')
             ->widgets([
                 Widgets\AccountWidget::class,
-                Widgets\FilamentInfoWidget::class,
+                // Widgets\FilamentInfoWidget::class,
             ])
             ->middleware([
                 EncryptCookies::class,
@@ -55,10 +63,23 @@ class FilamentPanelProvider extends PanelProvider
                 SubstituteBindings::class,
                 DisableBladeIconComponents::class,
                 DispatchServingFilamentEvent::class,
+                TrackVisitors::class,
+            ])
+            ->resources([
+                UserResource::class,
+                ArtikelResource::class,
+                ClientCounselerResource::class,
+                JadwalCounselorResource::class,
+                LayananResource::class,
+                OrganizerResource::class,
+                RecruitmentResource::class,
+            ])
+            ->plugins([
+                \BezhanSalleh\FilamentShield\FilamentShieldPlugin::make(),
             ])
             ->brandName('Open Your Mind')
             ->brandLogo(asset('images/logo.svg'))
-            ->favicon(asset('images/favicon.ico'))
+            ->favicon(asset('images/logo.svg'))
             ->authMiddleware([
                 Authenticate::class,
             ]);

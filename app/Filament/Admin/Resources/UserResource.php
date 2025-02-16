@@ -9,9 +9,6 @@ use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
-use Filament\Tables\Actions\CreateAction;
 
 class UserResource extends Resource
 {
@@ -41,6 +38,14 @@ class UserResource extends Resource
                     ])
                     ->required()
                     ->label('Role'),
+                Forms\Components\FileUpload::make('profile_photo_path')
+                    ->label('Profile Photo')
+                    ->disk('public')
+                    ->directory('profile-photos')
+                    ->image()
+                    ->nullable()
+                    ->helperText('Pilih foto untuk profil Anda')
+                    ->maxSize(2048),
                 Forms\Components\TextInput::make('password')
                     ->password()
                     ->required(fn($record) => $record === null)

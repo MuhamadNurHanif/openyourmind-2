@@ -100,6 +100,8 @@ class ArtikelResource extends Resource
                 TextColumn::make('deskripsi')
                     ->limit(100)
                     ->label('Deskripsi'),
+                Tables\Columns\ImageColumn::make('gambar')
+                    ->searchable(),
                 TextColumn::make('Aksi')
                     ->label('Aksi'),
             ])
