@@ -81,25 +81,11 @@ class AdminPanelProvider extends PanelProvider
                 DisableBladeIconComponents::class,
                 DispatchServingFilamentEvent::class,
                 TrackVisitors::class,
-                // PermissionMiddleware::class,
-                // RoleMiddleware::class,
-                // RoleOrPermissionMiddleware::class,
             ])
-            // ->resources([
-            //     UserResource::class,
-            //     ArtikelResource::class,
-            //     ClientCounselerResource::class,
-            //     JadwalCounselorResource::class,
-            //     LayananResource::class,
-            //     OrganizerResource::class,
-            //     RecruitmentResource::class,
-            // ])
             ->brandName('Open Your Mind Indonesia')
             ->favicon(asset('images/Logo.svg'))
             ->authMiddleware([
                 Authenticate::class,
-                // RoleMiddleware::class,
-                // PermissionMiddleware::class,
             ]);
     }
 }

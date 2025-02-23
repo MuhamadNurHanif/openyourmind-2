@@ -6,6 +6,7 @@ use App\Filament\Admin\Resources\ArtikelResource;
 use Filament\Resources\Pages\ListRecords;
 use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Columns\ImageColumn;
 
 class ListArtikel extends ListRecords
 {
@@ -28,6 +29,8 @@ class ListArtikel extends ListRecords
             TextColumn::make('deskripsi')
                 ->limit(100)
                 ->label('Deskripsi'),
+            ImageColumn::make('Gambar')
+                ->label('Gambar'),
         ];
     }
 
