@@ -28,3 +28,8 @@ Route::middleware([
         return view('dashboard');
     })->name('dashboard');
 });
+
+//tes service
+Route::get('/service', function () {
+    return view('service.service');
+});
