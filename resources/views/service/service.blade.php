@@ -1,4 +1,4 @@
-@extends('layouts.master')
+@extends('layout.app')
 
 @section('title', 'Landing Page - Laravel')
 
