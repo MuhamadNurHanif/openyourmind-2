@@ -18,8 +18,9 @@ Route::resource('client_counseler', ClientCounselerController::class);
 
 // FE Artikel
 Route::get('/artikel', [ArtikelController::class, 'index'])->name('artikel.index');
+Route::get('/artikel/detail', function () {
+    return view('artikel.detailArtikel');
+});
 
 // FE Service
-Route::get('/service', function () {
-    return view('service.service');
-});
+
