@@ -4,14 +4,21 @@ namespace App\Http\Controllers;
 
 use App\Models\ClientCounseler;
 use App\Models\Layanan;
+use App\Models\JadwalCounselor;
 use Illuminate\Http\Request;
 
 class ClientCounselerController extends Controller
 {
     public function index()
     {
-        $clientCounselers = ClientCounseler::with('layanan')->get();
-        return view('client_counseler.index', compact('clientCounselers'));
+        $layanan = Layanan::all();
+        $jadwal = JadwalCounselor::all();
+        $img = [
+            asset("public/aset1.png"),
+            asset("public/aset2.png"),
+            asset("public/aset3.png")
+        ];
+        return view('client_counseler.service', compact('layanan', 'jadwal', 'img'));
     }
 
     public function create()
@@ -32,7 +39,7 @@ class ClientCounselerController extends Controller
         ]);
 
         ClientCounseler::create($request->all());
-        return redirect()->route('client_counseler.index')->with('success', 'Data berhasil ditambahkan.');
+        return redirect()->back()->with('success', 'Terima kasih telah percaya dengan layanan kami. Tim kami akan segera menghubungi Anda dari email dan/atau nomor HP yang telah dimasukkan.');
     }
 
     public function edit($id)
@@ -64,4 +71,5 @@ class ClientCounselerController extends Controller
         $clientCounseler->delete();
         return redirect()->route('client_counseler.index')->with('success', 'Data berhasil dihapus.');
     }
+
 }
