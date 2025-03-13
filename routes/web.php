@@ -23,4 +23,6 @@ Route::get('/artikel/detail', function () {
 });
 
 // FE Service
+Route::get('/service', [ClientCounselerController::class, 'index']);
+
 
