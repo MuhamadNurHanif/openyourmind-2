@@ -19,12 +19,26 @@ use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\RichEditor;
+use BezhanSalleh\FilamentShield\Contracts\HasShieldPermissions;
 
-class JadwalCounselorResource extends Resource
+class JadwalCounselorResource extends Resource implements HasShieldPermissions
 {
     protected static ?string $model = JadwalCounselor::class;
     protected static ?string $navigationGroup = 'Konseling';
     protected static ?string $navigationIcon = 'heroicon-o-calendar';
+
+    public static function getPermissionPrefixes(): array
+    {
+        return [
+            'view',
+            'view_any',
+            'create',
+            'update',
+            'delete',
+            'delete_any',
+            'publish'
+        ];
+    }
 
     public static function form(Forms\Form $form): Forms\Form
     {

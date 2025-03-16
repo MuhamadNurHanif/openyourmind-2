@@ -7,13 +7,14 @@
     <title>@yield('title')</title>
     <script src="https://cdn.tailwindcss.com"></script>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <link rel="icon" href="{{ asset('images/Logo.svg') }}">
 </head>
 
 <body class="bg-[#fcf9f4] text-gray-900 !important">
 
     @include('layout.navbar')
 
-    <main class="container mx-auto bg-bg_primary px-4 py-10">
+    <main class="container px-4 py-10 mx-auto bg-bg_primary">
         @yield('content')
     </main>
 

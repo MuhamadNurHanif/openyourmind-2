@@ -16,13 +16,27 @@ use App\Filament\Admin\Resources\ClientCounselerResource\Pages;
 use App\Filament\Admin\Resources\ClientCounselerResource\RelationManagers;
 use App\Filament\Admin\Resources\ClientCounselerResource\Pages\EditClientCounseler;
 use App\Filament\Admin\Resources\ClientCounselerResource\Pages\ListClientCounselers;
+use BezhanSalleh\FilamentShield\Contracts\HasShieldPermissions;
 
-class ClientCounselerResource extends Resource
+class ClientCounselerResource extends Resource implements HasShieldPermissions
 {
     protected static ?string $model = ClientCounseler::class;
 
     protected static ?string $navigationGroup = 'Konseling';
     protected static ?string $navigationIcon = 'heroicon-o-user-group';
+
+    public static function getPermissionPrefixes(): array
+    {
+        return [
+            'view',
+            'view_any',
+            'create',
+            'update',
+            'delete',
+            'delete_any',
+            'publish'
+        ];
+    }
 
     public static function form(Form $form): Form
     {

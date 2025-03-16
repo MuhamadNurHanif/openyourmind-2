@@ -21,8 +21,9 @@ use Filament\Tables\Actions\DeleteAction;
 use Filament\Tables\Actions\ViewAction;
 use Filament\Tables\Actions\ActionGroup;
 use Filament\Tables\Columns\ImageColumn;
+use BezhanSalleh\FilamentShield\Contracts\HasShieldPermissions;
 
-class ArtikelResource extends Resource
+class ArtikelResource extends Resource implements HasShieldPermissions
 {
     protected static ?string $model = Artikel::class;
 
@@ -30,7 +31,19 @@ class ArtikelResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-clipboard';
 
-
+    // shield role permission
+    public static function getPermissionPrefixes(): array
+    {
+        return [
+            'view',
+            'view_any',
+            'create',
+            'update',
+            'delete',
+            'delete_any',
+            'publish'
+        ];
+    }
     public static function form(Forms\Form $form): Forms\Form
     {
         return $form

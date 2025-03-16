@@ -12,14 +12,28 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use BezhanSalleh\FilamentShield\Contracts\HasShieldPermissions;
 
-class RecruitmentResource extends Resource
+class RecruitmentResource extends Resource implements HasShieldPermissions
 {
     protected static ?string $model = Recruitment::class;
 
     protected static ?string $navigationGroup = 'Recrutmen';
 
     protected static ?string $navigationIcon = 'heroicon-o-briefcase';
+
+    public static function getPermissionPrefixes(): array
+    {
+        return [
+            'view',
+            'view_any',
+            'create',
+            'update',
+            'delete',
+            'delete_any',
+            'publish'
+        ];
+    }
 
     public static function form(Form $form): Form
     {

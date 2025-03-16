@@ -40,6 +40,7 @@ use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
 use App\Filament\Admin\Widgets\ArtikelChart;
 use App\Filament\Admin\Widgets\StatsOverview;
 use App\Filament\Admin\Widgets\VisitorChart;
+use BezhanSalleh\FilamentShield\Contracts\HasShieldPermissions;
 
 class AdminPanelProvider extends PanelProvider
 {
@@ -60,9 +61,6 @@ class AdminPanelProvider extends PanelProvider
             ->discoverPages(in: app_path('Filament/Admin/Pages'), for: 'App\\Filament\\Admin\\Pages')
             ->pages([
                 Pages\Dashboard::class,
-            ])
-            ->plugins([
-                \BezhanSalleh\FilamentShield\FilamentShieldPlugin::make(),
             ])
             ->widgets([
                 StatsOverview::class,
@@ -86,6 +84,9 @@ class AdminPanelProvider extends PanelProvider
             ->favicon(asset('images/Logo.svg'))
             ->authMiddleware([
                 Authenticate::class,
+            ])
+            ->plugins([
+                \BezhanSalleh\FilamentShield\FilamentShieldPlugin::make(),
             ]);
     }
 }

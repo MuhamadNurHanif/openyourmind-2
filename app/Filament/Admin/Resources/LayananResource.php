@@ -18,13 +18,27 @@ use Filament\Tables\Actions\ViewAction;
 use Filament\Tables\Actions\ActionGroup;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Forms\Components\TextInput;
+use BezhanSalleh\FilamentShield\Contracts\HasShieldPermissions;
 
-class LayananResource extends Resource
+class LayananResource extends Resource implements HasShieldPermissions
 {
     protected static ?string $model = Layanan::class;
 
     protected static ?string $navigationGroup = 'Konseling';
     protected static ?string $navigationIcon = 'heroicon-o-question-mark-circle';
+
+    public static function getPermissionPrefixes(): array
+    {
+        return [
+            'view',
+            'view_any',
+            'create',
+            'update',
+            'delete',
+            'delete_any',
+            'publish'
+        ];
+    }
 
     public static function form(Form $form): Form
     {

@@ -26,6 +26,7 @@ use App\Filament\Admin\Resources\JadwalCounselorResource;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
 use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
+use BezhanSalleh\FilamentShield\Contracts\HasShieldPermissions;
 
 class FilamentPanelProvider extends PanelProvider
 {
@@ -74,14 +75,14 @@ class FilamentPanelProvider extends PanelProvider
                 OrganizerResource::class,
                 RecruitmentResource::class,
             ])
-            ->plugins([
-                \BezhanSalleh\FilamentShield\FilamentShieldPlugin::make(),
-            ])
             ->brandName('Open Your Mind')
             ->brandLogo(asset('images/logo.svg'))
             ->favicon(asset('images/logo.svg'))
             ->authMiddleware([
                 Authenticate::class,
+            ])
+            ->plugins([
+                \BezhanSalleh\FilamentShield\FilamentShieldPlugin::make(),
             ]);
     }
 }
